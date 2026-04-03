@@ -1,9 +1,12 @@
 """
 ResuMax Backend — Voice Chat API
-AI-powered conversational resume advisor.
+AI-powered conversational resume advisor with neural TTS.
 """
 
+import io
+import base64
 import structlog
+import edge_tts
 from fastapi import APIRouter, Depends
 from pydantic import BaseModel
 
@@ -16,6 +19,9 @@ from app.services.groq_client import (
 
 logger = structlog.get_logger(__name__)
 router = APIRouter(prefix="/api/voice-chat", tags=["voice-chat"])
+
+# Microsoft Edge Neural Voice — natural American female with emotions
+TTS_VOICE = "en-US-JennyNeural"
 
 
 class ChatMessage(BaseModel):
@@ -39,6 +45,19 @@ RULES:
 - Use natural speaking patterns — no bullet points, no markdown
 - If you don't have enough context, ask a follow-up question
 - You're an expert in hiring, ATS systems, resume writing, and career strategy"""
+
+
+async def generate_tts_audio(text: str) -> str:
+    """Generate TTS audio using edge-tts and return base64-encoded mp3."""
+    communicate = edge_tts.Communicate(text, TTS_VOICE, rate="+5%", pitch="+0Hz")
+    audio_buffer = io.BytesIO()
+
+    async for chunk in communicate.stream():
+        if chunk["type"] == "audio":
+            audio_buffer.write(chunk["data"])
+
+    audio_buffer.seek(0)
+    return base64.b64encode(audio_buffer.read()).decode("utf-8")
 
 
 @router.post("/ask")
@@ -73,8 +92,15 @@ Respond naturally as Shruti, the AI resume advisor. Keep it short and conversati
         parse_json=False,
     )
 
-    # Clean up response (remove quotes if LLM wraps in them)
+    # Clean up response
     answer = response.strip().strip('"').strip("'")
 
+    # Generate TTS audio
+    try:
+        audio_base64 = await generate_tts_audio(answer)
+    except Exception as e:
+        logger.warning("tts_generation_failed", error=str(e))
+        audio_base64 = None
+
     logger.info("voice_chat_response", user_id=user["id"], response_len=len(answer))
-    return {"answer": answer}
+    return {"answer": answer, "audio": audio_base64}
