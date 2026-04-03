@@ -24,6 +24,7 @@ from app.api.auth import router as auth_router
 from app.api.analysis import router as analysis_router
 from app.api.history import router as history_router
 from app.api.linkedin import router as linkedin_router
+from app.api.linkedin_optimizer import router as linkedin_optimizer_router
 
 logger = structlog.get_logger(__name__)
 
@@ -95,6 +96,7 @@ def create_app() -> FastAPI:
     app.include_router(analysis_router)
     app.include_router(history_router)
     app.include_router(linkedin_router)
+    app.include_router(linkedin_optimizer_router)
 
     # Future routers (uncomment as built):
     # from app.api.shruti import router as shruti_router
