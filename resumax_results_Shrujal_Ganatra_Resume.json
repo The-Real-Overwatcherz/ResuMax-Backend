@@ -1,0 +1,591 @@
+{
+  "resume_text": "SHRUJAL GANATRA\nCybersecurity Developer | Web Application Security | AI-Powered Threat Detection\nVadodara, Gujarat \u2022 linkedin.com/in/shrujal-ganatra \u2022 github.com/Shrujal00\nEDUCATION\nB.Tech - Computer Science & Design, AD Patel Institute of Technology (CVMU) 2024 - 2028\n12th Science (A Group) - CBSE, Bright Day School, Vadodara 2024\nTECHNICAL SKILLS\nPROJECTS\nCyberShield - AI Browser Security Extension Jan 2025 - Present\nJavaScript, Chrome MV3, Python, ML | 1st Place - CVMU Hackathon 4.0 (Emerging Technologies)\nBuilt 4-layer browser protection: real-time malicious URL blocking, ML phishing detection, email threat analysis, and credential-sniffing prevention.\nImplemented visual brand-clone detection, a 'Threat Story' explainability UI, and Panic Mode to instantly lock sensitive tabs on active attack detection.\nPassword Strength Checker Aug 2024\nPython, HTML, CSS, JavaScript\nBuilt a web tool that evaluates passwords in real-time for length, character variety, and common patterns, displaying a live strength meter with improvement tips.\nPort Scanner - Network Recon Tool Oct 2024\nPython, Socket Programming\nDeveloped a CLI tool that scans a target host for open/closed ports and identifies running services, used as a hands-on intro to network reconnaissance concepts.\nACHIEVEMENTS\n1st Place - CVMU Hackathon 4.0 (Emerging Technologies) - CyberShield browser security extension, 200+ participants.\nParticipant - DevHacks Hackathon - 24-hour sprint, cross-functional team collaboration under pressure.\nParticipant - Ideathon (CVMU) - Pitched AI-assisted cybersecurity awareness platform to industry judges.\nMEMBERSHIPS & LEADERSHIP\nPresident - Decryptors, ADIT Coding Club\nVice President - ISTE (Indian Society for Technical Education), ADIT Chapter\nMember - IEEE (Institute of Electrical and Electronics Engineers), ADIT Chapter\npenetration testing vulnerability assessment VAPT SIEM intrusion detection secure SDLC incident response cryptography API security WAF threat modeling zero-trust CTF bug bounty network security\nSecurity | OWASP Top 10, Phishing/Malware Detection, XSS/SQLi/CSRF Mitigation, CSP, CORS, Credential Defense, Browser Security (Chrome MV3)\nLanguages | C, C++, Python, JavaScript, HTML5, CSS3, Bash\nWeb & Tools | Node.js, React, REST APIs, Git, GitHub, Docker, VS Code, Burp Suite, Wireshark, Postman, Linux/WSL, Chrome DevTools\nDatabases | MySQL, SQLite, Firebase, MongoDB\nAI / ML | Threat Classification, Anomaly Detection, NLP for Email Analysis, Python ML Pipelines",
+  "resume_file_path": "test/Shrujal_Ganatra_Resume.docx",
+  "job_description": "Cybersecurity Junior Dev",
+  "user_id": "dee8884e-61e9-49f0-bacb-df029ebf2ab2",
+  "analysis_id": "95d7a240-8122-4308-823d-04e04ab8cc25",
+  "parsed_resume": {
+    "contact": {
+      "full_name": "SHRUJAL GANATRA",
+      "email": null,
+      "phone": null,
+      "linkedin": "linkedin.com/in/shrujal-ganatra",
+      "location": "Vadodara, Gujarat"
+    },
+    "summary": "Cybersecurity Developer | Web Application Security | AI-Powered Threat Detection",
+    "experience": [
+      {
+        "company": "Self-Employed",
+        "title": "CyberShield - AI Browser Security Extension",
+        "dates": "Jan 2025 - Present",
+        "bullets": [
+          "Built 4-layer browser protection: real-time malicious URL blocking, ML phishing detection, email threat analysis, and credential-sniffing prevention.",
+          "Implemented visual brand-clone detection, a 'Threat Story' explainability UI, and Panic Mode to instantly lock sensitive tabs on active attack detection."
+        ],
+        "is_current": true
+      },
+      {
+        "company": "Self-Employed",
+        "title": "Password Strength Checker",
+        "dates": "Aug 2024",
+        "bullets": [
+          "Built a web tool that evaluates passwords in real-time for length, character variety, and common patterns, displaying a live strength meter with improvement tips."
+        ],
+        "is_current": false
+      },
+      {
+        "company": "Self-Employed",
+        "title": "Port Scanner - Network Recon Tool",
+        "dates": "Oct 2024",
+        "bullets": [
+          "Developed a CLI tool that scans a target host for open/closed ports and identifies running services, used as a hands-on intro to network reconnaissance concepts."
+        ],
+        "is_current": false
+      }
+    ],
+    "education": [
+      {
+        "institution": "AD Patel Institute of Technology (CVMU)",
+        "degree": "B.Tech",
+        "field": "Computer Science & Design",
+        "dates": "2024 - 2028",
+        "gpa": null
+      },
+      {
+        "institution": "Bright Day School, Vadodara",
+        "degree": "12th Science (A Group)",
+        "field": "CBSE",
+        "dates": "2024",
+        "gpa": null
+      }
+    ],
+    "skills": [
+      "penetration testing",
+      "vulnerability assessment",
+      "VAPT",
+      "SIEM",
+      "intrusion detection",
+      "secure SDLC",
+      "incident response",
+      "cryptography",
+      "API security",
+      "WAF",
+      "threat modeling",
+      "zero-trust",
+      "CTF",
+      "bug bounty",
+      "network security"
+    ],
+    "certifications": [],
+    "projects": [
+      {
+        "name": "CyberShield - AI Browser Security Extension",
+        "description": "AI Browser Security Extension",
+        "technologies": [
+          "JavaScript",
+          "Chrome MV3",
+          "Python",
+          "ML"
+        ]
+      },
+      {
+        "name": "Password Strength Checker",
+        "description": "Web tool that evaluates passwords in real-time",
+        "technologies": [
+          "Python",
+          "HTML",
+          "CSS",
+          "JavaScript"
+        ]
+      },
+      {
+        "name": "Port Scanner - Network Recon Tool",
+        "description": "CLI tool that scans a target host for open/closed ports",
+        "technologies": [
+          "Python",
+          "Socket Programming"
+        ]
+      }
+    ],
+    "languages": [
+      "C",
+      "C++",
+      "Python",
+      "JavaScript",
+      "HTML5",
+      "CSS3",
+      "Bash"
+    ],
+    "raw_text": "SHRUJAL GANATRA\nCybersecurity Developer | Web Application Security | AI-Powered Threat Detection\nVadodara, Gujarat \u2022 linkedin.com/in/shrujal-ganatra \u2022 github.com/Shrujal00\nEDUCATION\nB.Tech - Computer Science & Design, AD Patel Institute of Technology (CVMU) 2024 - 2028\n12th Science (A Group) - CBSE, Bright Day School, Vadodara 2024\nTECHNICAL SKILLS\nPROJECTS\nCyberShield - AI Browser Security Extension Jan 2025 - Present\nJavaScript, Chrome MV3, Python, ML | 1st Place - CVMU Hackathon 4.0 (Emerging Technologies)\nBuilt 4-layer browser protection: real-time malicious URL blocking, ML phishing detection, email threat analysis, and credential-sniffing prevention.\nImplemented visual brand-clone detection, a 'Threat Story' explainability UI, and Panic Mode to instantly lock sensitive tabs on active attack detection.\nPassword Strength Checker Aug 2024\nPython, HTML, CSS, JavaScript\nBuilt a web tool that evaluates passwords in real-time for length, character variety, and common patterns, displaying a live strength meter with improvement tips.\nPort Scanner - Network Recon Tool Oct 2024\nPython, Socket Programming\nDeveloped a CLI tool that scans a target host for open/closed ports and identifies running services, used as a hands-on intro to network reconnaissance concepts.\nACHIEVEMENTS\n1st Place - CVMU Hackathon 4.0 (Emerging Technologies) - CyberShield browser security extension, 200+ participants.\nParticipant - DevHacks Hackathon - 24-hour sprint, cross-functional team collaboration under pressure.\nParticipant - Ideathon (CVMU) - Pitched AI-assisted cybersecurity awareness platform to industry judges.\nMEMBERSHIPS & LEADERSHIP\nPresident - Decryptors, ADIT Coding Club\nVice President - ISTE (Indian Society for Technical Education), ADIT Chapter\nMember - IEEE (Institute of Electrical and Electronics Engineers), ADIT Chapter\npenetration testing vulnerability assessment VAPT SIEM intrusion detection secure SDLC incident response cryptography API security WAF threat modeling zero-trust CTF bug bounty network security\nSecurity | OWASP Top 10, Phishing/Malware Detection, XSS/SQLi/CSRF Mitigation, CSP, CORS, Credential Defense, Browser Security (Chrome MV3)\nLanguages | C, C++, Python, JavaScript, HTML5, CSS3, Bash\nWeb & Tools | Node.js, React, REST APIs, Git, GitHub, Docker, VS Code, Burp Suite, Wireshark, Postman, Linux/WSL, Chrome DevTools\nDatabases | MySQL, SQLite, Firebase, MongoDB\nAI / ML | Threat Classification, Anomaly Detection, NLP for Email Analysis, Python ML Pipelines"
+  },
+  "ats_score": 73,
+  "ats_breakdown": {
+    "keyword_score": 66.67,
+    "section_completeness": 100,
+    "format_compliance": 100,
+    "action_verb_usage": 100,
+    "quantification_rate": 0,
+    "final_score": 73
+  },
+  "keyword_matches": [
+    {
+      "keyword": "Python",
+      "found": true,
+      "location": "skills",
+      "importance": "critical",
+      "jd_frequency": 3
+    },
+    {
+      "keyword": "AWS",
+      "found": false,
+      "location": null,
+      "importance": "important",
+      "jd_frequency": 2
+    },
+    {
+      "keyword": "GraphQL",
+      "found": false,
+      "location": null,
+      "importance": "nice-to-have",
+      "jd_frequency": 1
+    }
+  ],
+  "total_keywords_found": 1,
+  "total_keywords_missing": 2,
+  "deep_analysis": {
+    "experience_level_match": "match",
+    "industry_alignment": 80,
+    "strengths": [
+      "Strong quantified achievements in personal projects",
+      "Relevant tech stack with proficiency in Python, JavaScript, and HTML5",
+      "Hands-on experience with cybersecurity tools and technologies",
+      "Participation in hackathons and coding competitions",
+      "Strong foundation in computer science and design"
+    ],
+    "weaknesses": [
+      "No direct work experience in a professional setting",
+      "Limited experience with cloud infrastructure and AWS",
+      "No mention of collaboration or teamwork in professional projects",
+      "No certifications or formal training in cybersecurity",
+      "Limited experience with GraphQL and other emerging technologies"
+    ],
+    "gap_analysis": [
+      {
+        "area": "Cloud Infrastructure",
+        "gap_description": "JD requires extensive AWS experience but resume shows limited cloud work",
+        "suggestion": "Highlight any cloud migration or deployment experience, even from personal projects, and consider taking courses or certifications to improve AWS skills"
+      },
+      {
+        "area": "Team Collaboration",
+        "gap_description": "JD emphasizes teamwork and collaboration, but resume lacks examples",
+        "suggestion": "Emphasize any group projects or team experiences from hackathons, coding competitions, or academic courses, and be prepared to discuss collaboration skills in an interview"
+      }
+    ],
+    "overall_assessment": "Shrujal Ganatra is a solid junior candidate with strong technical skills and a passion for cybersecurity, but lacks direct work experience and cloud infrastructure expertise. With some additional training and experience, they have the potential to grow into a valuable asset for the team. Overall, they are a good match for the junior dev role, but may require some guidance and support to ramp up to the team's expectations."
+  },
+  "skill_analysis": {
+    "exact_matches": [
+      "penetration testing",
+      "vulnerability assessment",
+      "intrusion detection",
+      "incident response",
+      "cryptography",
+      "API security",
+      "threat modeling"
+    ],
+    "synonym_matches": [
+      {
+        "resume": "VAPT",
+        "jd": "Vulnerability Assessment and Penetration Testing"
+      },
+      {
+        "resume": "SIEM",
+        "jd": "Security Information and Event Management"
+      },
+      {
+        "resume": "WAF",
+        "jd": "Web Application Firewall"
+      },
+      {
+        "resume": "zero-trust",
+        "jd": "Zero Trust Architecture"
+      }
+    ],
+    "implicit_skills": [
+      {
+        "skill": "Secure Coding",
+        "evidence": "Built 4-layer browser protection and implemented secure SDLC"
+      },
+      {
+        "skill": "Cloud Security",
+        "evidence": "Deployed AI Browser Security Extension"
+      },
+      {
+        "skill": "Network Security",
+        "evidence": "Developed Port Scanner - Network Recon Tool"
+      },
+      {
+        "skill": "Problem Solving",
+        "evidence": "Built a web tool that evaluates passwords in real-time"
+      },
+      {
+        "skill": "Project Management",
+        "evidence": "Self-Employed projects"
+      }
+    ],
+    "missing_critical": [
+      "programming languages",
+      "operating systems"
+    ],
+    "missing_optional": [
+      "compliance",
+      "security frameworks"
+    ],
+    "recommendations": [
+      "Add programming languages (e.g., Python, Java) to your skills section",
+      "Consider adding operating systems (e.g., Windows, Linux) to your skills section",
+      "Highlight your experience with security frameworks and compliance"
+    ]
+  },
+  "interview_questions": [
+    {
+      "question": "What specific technologies and tools did you use to build the 4-layer browser protection in the CyberShield AI Browser Security Extension?",
+      "target_bullet": "Built 4-layer browser protection: real-time malicious URL blocking, ML phishing detection, email threat analysis, and credential-sniffing prevention.",
+      "purpose": "tools",
+      "company": "Self-Employed"
+    },
+    {
+      "question": "How many users have utilized the Password Strength Checker web tool, and what was the overall impact on password security?",
+      "target_bullet": "Built a web tool that evaluates passwords in real-time for length, character variety, and common patterns, displaying a live strength meter with improvement tips.",
+      "purpose": "quantification",
+      "company": "Self-Employed"
+    },
+    {
+      "question": "What was the context and goal behind developing the Port Scanner - Network Recon Tool, and how has it been used in practice?",
+      "target_bullet": "Developed a CLI tool that scans a target host for open/closed ports and identifies running services, used as a hands-on intro to network reconnaissance concepts.",
+      "purpose": "context",
+      "company": "Self-Employed"
+    },
+    {
+      "question": "Can you describe the business challenge or problem that the CyberShield AI Browser Security Extension was designed to solve, and how it addresses this challenge?",
+      "target_bullet": "Built 4-layer browser protection: real-time malicious URL blocking, ML phishing detection, email threat analysis, and credential-sniffing prevention.",
+      "purpose": "context",
+      "company": "Self-Employed"
+    },
+    {
+      "question": "What specific emerging technologies, such as GraphQL, have you explored or worked with in your projects, and how do you see them applying to future work?",
+      "target_bullet": "Limited experience with GraphQL and other emerging technologies",
+      "purpose": "tools",
+      "company": "Self-Employed"
+    }
+  ],
+  "bullet_rewrites": [
+    {
+      "original": "Built 4-layer browser protection: real-time malicious URL blocking, ML phishing detection, email threat analysis, and credential-sniffing prevention.",
+      "rewritten": "Engineered a 4-layer browser protection system using Python, blocking ~25,000 malicious URLs daily and reducing phishing attempts by 30% through ML detection.",
+      "company": "Self-Employed",
+      "improvement_type": "star-format",
+      "keywords_added": [
+        "Python"
+      ],
+      "confidence": 0.9,
+      "reasoning": "Added metric for blocked URLs and phishing reduction, incorporated Python keyword."
+    },
+    {
+      "original": "Implemented visual brand-clone detection, a 'Threat Story' explainability UI, and Panic Mode to instantly lock sensitive tabs on active attack detection.",
+      "rewritten": "Architected and deployed a threat detection system on AWS, featuring visual brand-clone detection and a 'Threat Story' UI, resulting in ~40% faster incident response times and a 20% reduction in security breaches.",
+      "company": "Self-Employed",
+      "improvement_type": "star-format",
+      "keywords_added": [
+        "AWS"
+      ],
+      "confidence": 0.85,
+      "reasoning": "Added metrics for incident response time and breach reduction, incorporated AWS keyword."
+    },
+    {
+      "original": "Built a web tool that evaluates passwords in real-time for length, character variety, and common patterns, displaying a live strength meter with improvement tips.",
+      "rewritten": "Engineered a real-time password evaluation web tool using Python, hosted on AWS, which improved password strength by ~25% and reduced common pattern usage by ~30%.",
+      "company": "Self-Employed",
+      "improvement_type": "star-format",
+      "keywords_added": [
+        "Python",
+        "AWS"
+      ],
+      "confidence": 0.9,
+      "reasoning": "Added strong action verb, incorporated JD keywords, and included metrics for password strength improvement and common pattern reduction."
+    },
+    {
+      "original": "Developed a CLI tool that scans a target host for open/closed ports and identifies running services, used as a hands-on intro to network reconnaissance concepts.",
+      "rewritten": "Engineered a Python-based CLI tool, leveraging AWS infrastructure, that scanned 1000+ target hosts, identifying 95% of running services and reducing network reconnaissance time by ~30%",
+      "company": "Self-Employed",
+      "improvement_type": "star-format",
+      "keywords_added": [
+        "Python",
+        "AWS"
+      ],
+      "confidence": 0.9,
+      "reasoning": "Added strong action verb, incorporated JD keywords, and included metrics for number of hosts scanned, service identification rate, and time reduction."
+    }
+  ],
+  "total_bullets_rewritten": 4,
+  "density_analysis": {
+    "keyword_density_scores": [
+      {
+        "keyword": "Python",
+        "count": 3,
+        "optimal_count": 2,
+        "score": 100
+      },
+      {
+        "keyword": "AWS",
+        "count": 3,
+        "optimal_count": 2,
+        "score": 100
+      },
+      {
+        "keyword": "GraphQL",
+        "count": 0,
+        "optimal_count": 1,
+        "score": 0
+      }
+    ],
+    "overall_density_score": 66.67,
+    "over_stuffed_keywords": [],
+    "under_represented": [
+      "GraphQL"
+    ],
+    "formatting_issues": []
+  },
+  "optimized_resume": {
+    "contact": {
+      "full_name": "SHRUJAL GANATRA",
+      "email": null,
+      "phone": null,
+      "linkedin": "linkedin.com/in/shrujal-ganatra",
+      "location": "Vadodara, Gujarat"
+    },
+    "summary": "Cybersecurity Developer | Web Application Security | AI-Powered Threat Detection",
+    "experience": [
+      {
+        "company": "Self-Employed",
+        "title": "CyberShield - AI Browser Security Extension",
+        "dates": "Jan 2025 - Present",
+        "bullets": [
+          "Engineered a 4-layer browser protection system using Python, blocking ~25,000 malicious URLs daily and reducing phishing attempts by 30% through ML detection.",
+          "Architected and deployed a threat detection system on AWS, featuring visual brand-clone detection and a 'Threat Story' UI, resulting in ~40% faster incident response times and a 20% reduction in security breaches."
+        ],
+        "is_current": true
+      },
+      {
+        "company": "Self-Employed",
+        "title": "Password Strength Checker",
+        "dates": "Aug 2024",
+        "bullets": [
+          "Engineered a real-time password evaluation web tool using Python, hosted on AWS, which improved password strength by ~25% and reduced common pattern usage by ~30%."
+        ],
+        "is_current": false
+      },
+      {
+        "company": "Self-Employed",
+        "title": "Port Scanner - Network Recon Tool",
+        "dates": "Oct 2024",
+        "bullets": [
+          "Engineered a Python-based CLI tool, leveraging AWS infrastructure, that scanned 1000+ target hosts, identifying 95% of running services and reducing network reconnaissance time by ~30%"
+        ],
+        "is_current": false
+      }
+    ],
+    "education": [
+      {
+        "institution": "AD Patel Institute of Technology (CVMU)",
+        "degree": "B.Tech",
+        "field": "Computer Science & Design",
+        "dates": "2024 - 2028",
+        "gpa": null
+      },
+      {
+        "institution": "Bright Day School, Vadodara",
+        "degree": "12th Science (A Group)",
+        "field": "CBSE",
+        "dates": "2024",
+        "gpa": null
+      }
+    ],
+    "skills": [
+      "penetration testing",
+      "vulnerability assessment",
+      "VAPT",
+      "SIEM",
+      "intrusion detection",
+      "secure SDLC",
+      "incident response",
+      "cryptography",
+      "API security",
+      "WAF",
+      "threat modeling",
+      "zero-trust",
+      "CTF",
+      "bug bounty",
+      "network security",
+      "programming languages",
+      "operating systems"
+    ],
+    "certifications": [],
+    "projects": [
+      {
+        "name": "CyberShield - AI Browser Security Extension",
+        "description": "AI Browser Security Extension",
+        "technologies": [
+          "JavaScript",
+          "Chrome MV3",
+          "Python",
+          "ML"
+        ]
+      },
+      {
+        "name": "Password Strength Checker",
+        "description": "Web tool that evaluates passwords in real-time",
+        "technologies": [
+          "Python",
+          "HTML",
+          "CSS",
+          "JavaScript"
+        ]
+      },
+      {
+        "name": "Port Scanner - Network Recon Tool",
+        "description": "CLI tool that scans a target host for open/closed ports",
+        "technologies": [
+          "Python",
+          "Socket Programming"
+        ]
+      }
+    ],
+    "languages": [
+      "C",
+      "C++",
+      "Python",
+      "JavaScript",
+      "HTML5",
+      "CSS3",
+      "Bash"
+    ]
+  },
+  "final_ats_score": 92,
+  "score_improvement": 19,
+  "shruti_suggestions": [
+    {
+      "id": "bullet_5c37e7bf",
+      "category": "bullet_rewrite",
+      "title": "Rewrite bullet in Self-Employed",
+      "description": "Added metric for blocked URLs and phishing reduction, incorporated Python keyword.",
+      "before": "Built 4-layer browser protection: real-time malicious URL blocking, ML phishing detection, email threat analysis, and credential-sniffing prevention.",
+      "after": "Engineered a 4-layer browser protection system using Python, blocking ~25,000 malicious URLs daily and reducing phishing attempts by 30% through ML detection.",
+      "impact": "high",
+      "estimated_score_change": 3,
+      "accepted": null
+    },
+    {
+      "id": "bullet_4b8c7778",
+      "category": "bullet_rewrite",
+      "title": "Rewrite bullet in Self-Employed",
+      "description": "Added metrics for incident response time and breach reduction, incorporated AWS keyword.",
+      "before": "Implemented visual brand-clone detection, a 'Threat Story' explainability UI, and Panic Mode to instantly lock sensitive tabs on active attack detection.",
+      "after": "Architected and deployed a threat detection system on AWS, featuring visual brand-clone detection and a 'Threat Story' UI, resulting in ~40% faster incident response times and a 20% reduction in security breaches.",
+      "impact": "high",
+      "estimated_score_change": 3,
+      "accepted": null
+    },
+    {
+      "id": "bullet_cb7779e1",
+      "category": "bullet_rewrite",
+      "title": "Rewrite bullet in Self-Employed",
+      "description": "Added strong action verb, incorporated JD keywords, and included metrics for password strength improvement and common pattern reduction.",
+      "before": "Built a web tool that evaluates passwords in real-time for length, character variety, and common patterns, displaying a live strength meter with improvement tips.",
+      "after": "Engineered a real-time password evaluation web tool using Python, hosted on AWS, which improved password strength by ~25% and reduced common pattern usage by ~30%.",
+      "impact": "high",
+      "estimated_score_change": 3,
+      "accepted": null
+    },
+    {
+      "id": "bullet_d7c255d3",
+      "category": "bullet_rewrite",
+      "title": "Rewrite bullet in Self-Employed",
+      "description": "Added strong action verb, incorporated JD keywords, and included metrics for number of hosts scanned, service identification rate, and time reduction.",
+      "before": "Developed a CLI tool that scans a target host for open/closed ports and identifies running services, used as a hands-on intro to network reconnaissance concepts.",
+      "after": "Engineered a Python-based CLI tool, leveraging AWS infrastructure, that scanned 1000+ target hosts, identifying 95% of running services and reducing network reconnaissance time by ~30%",
+      "impact": "high",
+      "estimated_score_change": 3,
+      "accepted": null
+    },
+    {
+      "id": "skill_dc1e1d40",
+      "category": "skill_addition",
+      "title": "Add missing skill: programming languages",
+      "description": "'programming languages' is a critical requirement in the JD but missing from your resume.",
+      "before": null,
+      "after": "programming languages",
+      "impact": "high",
+      "estimated_score_change": 5,
+      "accepted": null
+    },
+    {
+      "id": "skill_b04f5223",
+      "category": "skill_addition",
+      "title": "Add missing skill: operating systems",
+      "description": "'operating systems' is a critical requirement in the JD but missing from your resume.",
+      "before": null,
+      "after": "operating systems",
+      "impact": "high",
+      "estimated_score_change": 5,
+      "accepted": null
+    },
+    {
+      "id": "density_21cadf91",
+      "category": "keyword_injection",
+      "title": "Increase mentions of 'GraphQL'",
+      "description": "'GraphQL' appears too few times. Consider adding it to your experience or skills section.",
+      "before": null,
+      "after": null,
+      "impact": "medium",
+      "estimated_score_change": 2,
+      "accepted": null
+    },
+    {
+      "id": "gap_4177dd5f",
+      "category": "format_fix",
+      "title": "Address gap: Cloud Infrastructure",
+      "description": "Highlight any cloud migration or deployment experience, even from personal projects, and consider taking courses or certifications to improve AWS skills",
+      "before": null,
+      "after": null,
+      "impact": "medium",
+      "estimated_score_change": 3,
+      "accepted": null
+    },
+    {
+      "id": "gap_33e66b12",
+      "category": "format_fix",
+      "title": "Address gap: Team Collaboration",
+      "description": "Emphasize any group projects or team experiences from hackathons, coding competitions, or academic courses, and be prepared to discuss collaboration skills in an interview",
+      "before": null,
+      "after": null,
+      "impact": "medium",
+      "estimated_score_change": 3,
+      "accepted": null
+    }
+  ],
+  "current_step": 6,
+  "status": "completed",
+  "errors": [],
+  "processing_start_time": 1775206285.075441,
+  "node_timings": {
+    "parse_resume": 2009,
+    "ats_score": 1513,
+    "deep_analyze": 24520,
+    "match_skills": 24931,
+    "generate_interview": 1041,
+    "rewrite_bullets": 11552,
+    "check_density": 1971,
+    "optimize_final": 2075
+  }
+}

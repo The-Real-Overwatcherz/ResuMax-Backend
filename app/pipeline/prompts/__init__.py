@@ -1,0 +1,1 @@
+# ResuMax — Pipeline Prompt Templates

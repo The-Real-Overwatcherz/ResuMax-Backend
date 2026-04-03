@@ -1,0 +1,1 @@
+# ResuMax Backend — Pydantic Models
