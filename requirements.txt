@@ -4,10 +4,10 @@ uvicorn[standard]==0.32.0
 python-multipart==0.0.12
 
 # LangChain + LangGraph
-langchain==0.3.12
-langchain-groq==0.2.4
-langchain-core==0.3.25
-langgraph==0.2.56
+langchain>=0.3.12
+langchain-groq>=0.2.4
+langchain-core>=0.3.33
+langgraph>=0.2.56
 
 # Groq SDK
 groq==0.14.0
