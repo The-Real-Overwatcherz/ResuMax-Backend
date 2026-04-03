@@ -120,6 +120,14 @@ async def ats_scoring_node(state: PipelineState) -> dict:
         parse_json=True,
     )
 
+    extracted_title = jd_requirements.get("job_title") if jd_requirements else None
+    if extracted_title:
+        try:
+            from app.services.supabase import update_analysis_status
+            await update_analysis_status(state["analysis_id"], status="scoring", step=2, job_title=extracted_title)
+        except Exception:
+            pass
+
     # ── Call 2: Score Resume ──
     ats_prompt = ATS_SCORE_PROMPT.format(
         parsed_resume=parsed_resume,
@@ -152,6 +160,7 @@ async def ats_scoring_node(state: PipelineState) -> dict:
         "keyword_matches": keyword_matches,
         "total_keywords_found": found,
         "total_keywords_missing": missing,
+        "job_title": extracted_title,
         "current_step": 2,
         "status": "scoring",
         "node_timings": {**state.get("node_timings", {}), "ats_score": elapsed},

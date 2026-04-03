@@ -18,6 +18,7 @@ class PipelineState(TypedDict):
     resume_text: str
     resume_file_path: str
     job_description: str
+    job_title: Optional[str]
     user_id: str
     analysis_id: str
 

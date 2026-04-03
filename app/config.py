@@ -24,6 +24,15 @@ class Settings(BaseSettings):
     aws_secret_access_key: Optional[str] = Field(default=None, description="AWS secret key")
     aws_region: str = Field(default="us-east-1", description="AWS region for Bedrock")
 
+    # ── LinkedIn OAuth ────────────────────────────────────────
+    linkedin_client_id: str = Field(default="", description="LinkedIn OAuth Client ID")
+    linkedin_client_secret: str = Field(default="", description="LinkedIn OAuth Client Secret")
+    linkedin_redirect_uri: str = Field(
+        default="http://localhost:8000/api/auth/linkedin/callback",
+        description="LinkedIn OAuth redirect URI",
+    )
+    frontend_url: str = Field(default="http://localhost:3000", description="Frontend URL for redirects")
+
     # ── Server ────────────────────────────────────────────────
     host: str = Field(default="0.0.0.0", description="Server host")
     port: int = Field(default=8000, description="Server port")
