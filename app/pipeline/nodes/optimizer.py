@@ -43,7 +43,7 @@ TASKS:
 3. Keep all other sections unchanged (contact, education, etc.)
 4. Recalculate an estimated ATS score for the optimized version (0-100)
 
-OUTPUT (JSON):
+OUTPUT (EXAMPLE JSON - DO NOT USE THESE NUMBERS, CALCULATE YOUR OWN):
 {{
     "optimized_resume": {{
         "contact": {{ ... }},
@@ -63,6 +63,7 @@ OUTPUT (JSON):
     ]
 }}
 
+IMPORTANT: The `final_ats_score` of 84 is just a placeholder! You MUST estimate the true ATS score of the new optimized resume.
 Return ONLY valid JSON."""
 
 

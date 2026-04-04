@@ -174,6 +174,11 @@ async def get_analysis_results(
         # Meta
         "processing_time_ms": analysis.get("processing_time_ms"),
         "model_used": analysis.get("model_used"),
+        
+        # Context for Voice Chat
+        "resume_text": analysis.get("resume_text"),
+        "job_description": analysis.get("job_description"),
+        "parsed_resume": analysis.get("parsed_resume"),
     }
 
 

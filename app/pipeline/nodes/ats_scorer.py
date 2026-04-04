@@ -80,7 +80,7 @@ SCORING RUBRIC:
 5. QUANTIFICATION_RATE (20% weight): % of bullets with measurable metrics
    - Numbers, percentages, dollar amounts, time periods
 
-OUTPUT (JSON):
+OUTPUT (EXAMPLE JSON - YOU MUST CALCULATE YOUR OWN ACCURATE NUMBERS):
 {{
     "keyword_score": 85,
     "section_completeness": 100,
@@ -94,8 +94,9 @@ OUTPUT (JSON):
     ]
 }}
 
-IMPORTANT: final_score must be the weighted average: keyword*0.4 + section*0.15 + format*0.1 + verbs*0.15 + quant*0.2
-Return ONLY valid JSON."""
+IMPORTANT: The numbers in the example are just placeholders. DO NOT copy them.
+final_score must be the weighted average: keyword*0.4 + section*0.15 + format*0.1 + verbs*0.15 + quant*0.2
+Return ONLY valid JSON. Return no preamble and no explanations."""
 
 
 async def ats_scoring_node(state: PipelineState) -> dict:
