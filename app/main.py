@@ -26,6 +26,10 @@ from app.api.history import router as history_router
 from app.api.linkedin import router as linkedin_router
 from app.api.linkedin_optimizer import router as linkedin_optimizer_router
 from app.api.voice_chat import router as voice_chat_router
+from app.api.github_enhancer import router as github_router
+from app.api.reports import router as reports_router
+from app.api.social_post import router as social_post_router
+from app.api.x_analyzer import router as x_analyzer_router
 
 logger = structlog.get_logger(__name__)
 
@@ -86,6 +90,7 @@ def create_app() -> FastAPI:
     app.add_middleware(
         CORSMiddleware,
         allow_origins=settings.cors_origins_list,
+        allow_origin_regex=r"^chrome-extension://.*$",
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
@@ -99,6 +104,10 @@ def create_app() -> FastAPI:
     app.include_router(linkedin_router)
     app.include_router(linkedin_optimizer_router)
     app.include_router(voice_chat_router)
+    app.include_router(github_router)
+    app.include_router(reports_router)
+    app.include_router(social_post_router)
+    app.include_router(x_analyzer_router)
 
     # Future routers (uncomment as built):
     # from app.api.shruti import router as shruti_router

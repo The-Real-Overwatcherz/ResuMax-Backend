@@ -82,7 +82,7 @@ def get_groq_balanced() -> ChatGroq:
 
 # ── LLM Call Helpers ─────────────────────────────────────────────
 
-@retry(stop=stop_after_attempt(2), wait=wait_exponential(multiplier=1, min=2, max=10))
+@retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=2, min=3, max=30))
 async def call_llm(llm: ChatGroq, prompt: str, system_prompt: str = "") -> str:
     """
     Call an LLM with rate limiting and retry logic.
@@ -129,6 +129,17 @@ async def call_llm_json(llm: ChatGroq, prompt: str, system_prompt: str = "") -> 
         return json.loads(text)
     except json.JSONDecodeError as e:
         logger.warning("json_parse_failed", error=str(e), raw_preview=text[:200])
+
+        # Handle "Extra data" — take only the first JSON object
+        if "Extra data" in str(e):
+            try:
+                decoder = json.JSONDecoder()
+                result, _ = decoder.raw_decode(text)
+                logger.info("json_recovered_via_raw_decode")
+                return result
+            except json.JSONDecodeError:
+                pass
+
         # Try to find JSON object in the response
         start_idx = text.find("{")
         end_idx = text.rfind("}") + 1
@@ -136,7 +147,14 @@ async def call_llm_json(llm: ChatGroq, prompt: str, system_prompt: str = "") -> 
             try:
                 return json.loads(text[start_idx:end_idx])
             except json.JSONDecodeError:
-                pass
+                # Last resort: try raw_decode from the first {
+                try:
+                    decoder = json.JSONDecoder()
+                    result, _ = decoder.raw_decode(text[start_idx:])
+                    logger.info("json_recovered_via_raw_decode_offset")
+                    return result
+                except json.JSONDecodeError:
+                    pass
         raise ValueError(f"Failed to parse LLM response as JSON: {e}")
 
 
@@ -150,6 +168,9 @@ async def call_llm_with_fallback(
     """
     Call primary LLM, fall back to secondary on failure.
     Returns parsed JSON dict or raw string based on parse_json flag.
+
+    If primary is 70B and fallback is 8B, we retry the 70B with a wait
+    before falling back, since 8B produces low-quality results on complex prompts.
     """
     call_fn = call_llm_json if parse_json else call_llm
 
@@ -161,6 +182,18 @@ async def call_llm_with_fallback(
             model=primary.model_name,
             error=str(primary_err),
         )
+
+        # If primary is 70B and fallback is 8B, retry primary after a cooldown
+        # rather than getting garbage from 8B
+        is_70b_to_8b = "70b" in primary.model_name and "8b" in fallback.model_name
+        if is_70b_to_8b:
+            logger.info("retrying_primary_after_cooldown", model=primary.model_name, wait_seconds=15)
+            await asyncio.sleep(15)
+            try:
+                return await call_fn(primary, prompt, system_prompt)
+            except Exception as retry_err:
+                logger.warning("primary_retry_also_failed", error=str(retry_err))
+
         try:
             return await call_fn(fallback, prompt, system_prompt)
         except Exception as fallback_err:

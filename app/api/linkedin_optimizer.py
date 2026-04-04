@@ -1,204 +1,217 @@
 """
 ResuMax Backend — LinkedIn Optimizer API
-AI-powered LinkedIn profile optimization and content strategy.
+Upload a screenshot of your LinkedIn profile → AI analyzes it and gives suggestions.
 """
 
+import base64
+import json
 import structlog
-from fastapi import APIRouter, Depends
-from pydantic import BaseModel
+from time import time
+from fastapi import APIRouter, Depends, UploadFile, File, Form
 from typing import Optional
 
 from app.api.deps import get_current_user
-from app.services.groq_client import (
-    get_groq_balanced,
-    get_groq_fast,
-    call_llm_with_fallback,
-)
+from app.config import get_settings
 
 logger = structlog.get_logger(__name__)
 router = APIRouter(prefix="/api/linkedin-optimizer", tags=["linkedin-optimizer"])
 
 
-class LinkedInOptimizeRequest(BaseModel):
-    full_name: str
-    current_role: str = ""
-    industry: str = ""
-    experience_summary: str = ""
-    skills: list[str] = []
-    current_headline: str = ""
-    current_about: str = ""
-    target_audience: str = ""
-    goals: str = ""
+SYSTEM_PROMPT = """You are an expert LinkedIn profile analyst. You analyze screenshots with extreme attention to detail.
+
+CRITICAL: LOOK AT THE SCREENSHOT CAREFULLY!
+1. If there is a banner with colors, images, or text at the top - that's a CUSTOM BANNER (not default gray)
+2. If there is a profile photo of a person - analyze its quality
+3. READ the headline text that appears below the name
+4. Look for About, Experience, Education sections - describe what you see
+
+SCORING:
+- Banner: 0 ONLY if it's plain gray/default. Any custom image/color = 50-100
+- Photo: Score based on professionalism (good lighting, clear face = higher)
+- Sections not visible in screenshot = mark as "not_visible" with score 0
+
+Be ACCURATE. Don't say "no banner" if there clearly IS a banner image visible.
+
+Always return valid JSON."""
 
 
-SYSTEM_PROMPT = """You are an elite LinkedIn growth strategist and personal branding expert.
-You help professionals optimize their LinkedIn presence for maximum visibility, engagement, and career growth.
-You understand LinkedIn's algorithm deeply — how it ranks content, boosts engagement, and surfaces profiles in search.
-Always return valid JSON matching the requested schema. No markdown outside JSON."""
+ANALYZE_PROMPT = """Analyze this LinkedIn profile screenshot. LOOK CAREFULLY at what's actually visible.
 
+STEP BY STEP:
+1. BANNER: Look at the TOP of the profile. Is there a colored/image banner, or plain gray?
+   - If you see ANY custom image, colors, text overlay = it's a CUSTOM BANNER (score 50-90)
+   - Only plain gray background = "missing" (score 0)
 
-OPTIMIZE_PROMPT = """Analyze this professional's profile and generate a COMPLETE LinkedIn optimization strategy.
+2. PROFILE PHOTO: Is there a photo? How professional does it look?
 
-PROFESSIONAL PROFILE:
-- Name: {full_name}
-- Current Role: {current_role}
-- Industry: {industry}
-- Experience: {experience_summary}
-- Skills: {skills}
-- Current Headline: {current_headline}
-- Current About: {current_about}
-- Target Audience: {target_audience}
-- Goals: {goals}
+3. HEADLINE: Read the text below the person's name. Quote it exactly.
 
-Return a JSON object with this EXACT structure:
+4. ABOUT SECTION: Can you see an "About" section? If yes, summarize it.
+
+5. EXPERIENCE: Can you see an "Experience" section? List any visible jobs.
+
+6. EDUCATION: Can you see an "Education" section? List any visible schools.
+
+7. SKILLS: Can you see skills listed?
+
+{additional_context}
+
+Return JSON:
 {{
-  "profile_optimization": {{
-    "headline_options": [
-      "headline option 1 (max 220 chars, keyword-rich)",
-      "headline option 2",
-      "headline option 3"
-    ],
-    "about_section": "A compelling 2000-char max About section in first person. Conversational, keyword-rich, with a clear CTA. Use line breaks for readability.",
-    "experience_tips": [
-      "Specific tip for improving their experience section",
-      "Another tip"
-    ],
-    "profile_keywords": ["keyword1", "keyword2", "keyword3", "keyword4", "keyword5"]
-  }},
-  "content_calendar": {{
-    "best_posting_times": [
-      {{"day": "Tuesday", "time": "8:00 AM", "reason": "Why this time works"}},
-      {{"day": "Wednesday", "time": "12:00 PM", "reason": "Why this time works"}},
-      {{"day": "Thursday", "time": "7:30 AM", "reason": "Why this time works"}}
-    ],
-    "posting_frequency": "How often they should post per week with reasoning",
-    "content_mix": [
-      {{"type": "Personal Story", "percentage": 30, "description": "Why and what kind"}},
-      {{"type": "Industry Insights", "percentage": 25, "description": "Why and what kind"}},
-      {{"type": "How-to / Tips", "percentage": 20, "description": "Why and what kind"}},
-      {{"type": "Engagement Posts", "percentage": 15, "description": "Why and what kind"}},
-      {{"type": "Achievements / Wins", "percentage": 10, "description": "Why and what kind"}}
-    ]
-  }},
-  "post_ideas": [
+  "profile_name": "<EXACT name of the person from profile>",
+  "overall_score": <average of visible sections>,
+  "overall_summary": "<2-3 sentence assessment>",
+  "sections": [
     {{
-      "title": "Post idea title",
-      "hook": "The first 2 lines that appear before 'see more' — must be scroll-stopping",
-      "outline": "Brief outline of the full post (3-5 bullet points)",
-      "format": "text / carousel / poll / video / document",
-      "best_day": "Tuesday"
+      "name": "Banner Image",
+      "score": <0 if plain gray, 50-100 if custom image/colors visible>,
+      "status": "<missing|needs_work|good|excellent>",
+      "current": "<describe what you see: colors, images, text, or 'Plain gray default'>",
+      "suggestions": ["<suggestions>"]
     }},
     {{
-      "title": "Post idea 2",
-      "hook": "Hook line",
-      "outline": "Outline",
-      "format": "format type",
-      "best_day": "Day"
+      "name": "Profile Photo",
+      "score": <score>,
+      "status": "<status>",
+      "current": "<describe: professional headshot, casual, etc>",
+      "suggestions": ["<suggestions>"]
     }},
     {{
-      "title": "Post idea 3",
-      "hook": "Hook line",
-      "outline": "Outline",
-      "format": "format type",
-      "best_day": "Day"
+      "name": "Headline",
+      "score": <score>,
+      "status": "<status>",
+      "current": "<EXACT TEXT of the headline>",
+      "suggestions": ["<suggestions>"]
     }},
     {{
-      "title": "Post idea 4",
-      "hook": "Hook line",
-      "outline": "Outline",
-      "format": "format type",
-      "best_day": "Day"
+      "name": "About Section",
+      "score": <0 if not visible, else score based on content>,
+      "status": "<not_visible|missing|needs_work|good|excellent>",
+      "current": "<summarize or 'Not visible in screenshot'>",
+      "suggestions": ["<suggestions>"]
     }},
     {{
-      "title": "Post idea 5",
-      "hook": "Hook line",
-      "outline": "Outline",
-      "format": "format type",
-      "best_day": "Day"
+      "name": "Experience",
+      "score": <0 if not visible, else score>,
+      "status": "<status>",
+      "current": "<list visible jobs or 'Not visible in screenshot'>",
+      "suggestions": ["<suggestions>"]
+    }},
+    {{
+      "name": "Education",
+      "score": <0 if not visible, else score>,
+      "status": "<status>",
+      "current": "<list visible schools or 'Not visible in screenshot'>",
+      "suggestions": ["<suggestions>"]
+    }},
+    {{
+      "name": "Skills & Endorsements",
+      "score": <0 if not visible, else score>,
+      "status": "<status>",
+      "current": "<list skills or 'Not visible'>",
+      "suggestions": ["<suggestions>"]
+    }},
+    {{
+      "name": "Activity & Posts",
+      "score": <0 if not visible, else score>,
+      "status": "<status>",
+      "current": "<describe or 'Not visible'>",
+      "suggestions": ["<suggestions>"]
     }}
   ],
-  "post_templates": [
-    {{
-      "name": "Template name (e.g. 'The Lesson Learned')",
-      "template": "Full ready-to-post content with placeholders in [brackets] where they should customize. Include emojis, line breaks, and formatting.",
-      "when_to_use": "When to use this template"
-    }},
-    {{
-      "name": "Template 2",
-      "template": "Full template text",
-      "when_to_use": "When to use"
-    }},
-    {{
-      "name": "Template 3",
-      "template": "Full template text",
-      "when_to_use": "When to use"
-    }}
+  "quick_wins": ["<action 1>", "<action 2>", "<action 3>"],
+  "advanced_tips": [
+    {{"tip": "<tip>", "why": "<reason>", "how": "<how to do it>"}}
   ],
-  "hashtag_strategy": {{
-    "primary_hashtags": ["5 high-volume hashtags relevant to their industry"],
-    "niche_hashtags": ["5 lower-competition niche hashtags for their specific role"],
-    "branded_hashtags": ["2-3 personal brand hashtag suggestions"],
-    "usage_tips": "How many hashtags to use per post and where to place them"
-  }},
-  "engagement_tips": [
-    {{
-      "tip": "Specific actionable engagement tip",
-      "why": "Why this works with LinkedIn's algorithm",
-      "action": "Exact action to take today"
-    }},
-    {{
-      "tip": "Tip 2",
-      "why": "Reasoning",
-      "action": "Action"
-    }},
-    {{
-      "tip": "Tip 3",
-      "why": "Reasoning",
-      "action": "Action"
-    }},
-    {{
-      "tip": "Tip 4",
-      "why": "Reasoning",
-      "action": "Action"
-    }},
-    {{
-      "tip": "Tip 5",
-      "why": "Reasoning",
-      "action": "Action"
-    }}
-  ]
+  "headline_suggestions": ["<option 1>", "<option 2>", "<option 3>"],
+  "keyword_recommendations": ["<keywords>"]
 }}
 
-Be specific to their industry, role, and goals. No generic advice. Every recommendation should be actionable."""
+BEFORE RESPONDING - VERIFY:
+1. Did I look at the banner area? If I see colors/images, it's NOT "missing"
+2. Did I read the actual headline text?
+3. Am I only marking sections as 0 if truly not visible?"""
 
 
-@router.post("/optimize")
-async def optimize_linkedin(
-    request: LinkedInOptimizeRequest,
+@router.post("/analyze")
+async def analyze_linkedin_screenshot(
+    screenshot: UploadFile = File(...),
+    context: str = Form(""),
     user: dict = Depends(get_current_user),
 ):
-    """Generate a full LinkedIn optimization strategy."""
-    logger.info("linkedin_optimize_start", user_id=user["id"], role=request.current_role)
+    """Analyze a LinkedIn profile screenshot and return optimization suggestions."""
+    logger.info("linkedin_analyze_start", user_id=user["id"], filename=screenshot.filename)
 
-    prompt = OPTIMIZE_PROMPT.format(
-        full_name=request.full_name,
-        current_role=request.current_role or "Not specified",
-        industry=request.industry or "Not specified",
-        experience_summary=request.experience_summary[:3000] or "Not provided",
-        skills=", ".join(request.skills[:20]) if request.skills else "Not provided",
-        current_headline=request.current_headline or "Not provided",
-        current_about=request.current_about or "Not provided",
-        target_audience=request.target_audience or "Not specified",
-        goals=request.goals or "Grow LinkedIn presence and career opportunities",
-    )
+    # Read and encode the image
+    image_bytes = await screenshot.read()
+    image_base64 = base64.b64encode(image_bytes).decode("utf-8")
 
-    result = await call_llm_with_fallback(
-        primary=get_groq_balanced(),
-        fallback=get_groq_fast(),
-        prompt=prompt,
-        system_prompt=SYSTEM_PROMPT,
-        parse_json=True,
-    )
+    # Determine MIME type
+    content_type = screenshot.content_type or "image/png"
+    if content_type not in ("image/png", "image/jpeg", "image/webp", "image/gif"):
+        content_type = "image/png"
 
-    logger.info("linkedin_optimize_complete", user_id=user["id"])
+    additional_context = ""
+    if context.strip():
+        additional_context = f"ADDITIONAL CONTEXT FROM USER: {context.strip()}"
+
+    prompt = ANALYZE_PROMPT.format(additional_context=additional_context)
+
+    # Use Groq vision model directly
+    settings = get_settings()
+
+    from groq import Groq
+
+    client = Groq(api_key=settings.groq_api_key)
+
+    start = time()
+    try:
+        response = client.chat.completions.create(
+            model="meta-llama/llama-4-scout-17b-16e-instruct",
+            messages=[
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {
+                    "role": "user",
+                    "content": [
+                        {"type": "text", "text": prompt},
+                        {
+                            "type": "image_url",
+                            "image_url": {
+                                "url": f"data:{content_type};base64,{image_base64}",
+                            },
+                        },
+                    ],
+                },
+            ],
+            temperature=0.3,
+            max_tokens=4096,
+        )
+        elapsed = int((time() - start) * 1000)
+        raw_text = response.choices[0].message.content
+        logger.info("linkedin_vision_complete", elapsed_ms=elapsed, chars=len(raw_text))
+    except Exception as e:
+        logger.error("linkedin_vision_failed", error=str(e))
+        raise
+
+    # Parse JSON from response
+    text = raw_text.strip()
+    if text.startswith("```json"):
+        text = text[7:]
+    elif text.startswith("```"):
+        text = text[3:]
+    if text.endswith("```"):
+        text = text[:-3]
+    text = text.strip()
+
+    try:
+        result = json.loads(text)
+    except json.JSONDecodeError:
+        start_idx = text.find("{")
+        end_idx = text.rfind("}") + 1
+        if start_idx != -1 and end_idx > start_idx:
+            result = json.loads(text[start_idx:end_idx])
+        else:
+            raise ValueError("Failed to parse vision model response as JSON")
+
+    logger.info("linkedin_analyze_complete", user_id=user["id"], score=result.get("overall_score"))
     return result

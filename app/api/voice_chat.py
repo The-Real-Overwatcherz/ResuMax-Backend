@@ -7,10 +7,11 @@ import io
 import base64
 import structlog
 import edge_tts
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, UploadFile, File
 from pydantic import BaseModel
 
 from app.api.deps import get_current_user
+from app.services.file_parser import parse_resume_file
 from app.services.groq_client import (
     get_groq_balanced,
     get_groq_fast,
@@ -66,7 +67,7 @@ async def voice_chat_ask(
     user: dict = Depends(get_current_user),
 ):
     """Process a voice chat question about the user's resume."""
-    logger.info("voice_chat_ask", user_id=user["id"], question_len=len(request.question))
+    logger.info("voice_chat_ask", user_id=user["id"], question_len=len(request.question), resume_context_len=len(request.resume_context))
 
     # Build conversation context
     history_text = ""
@@ -104,3 +105,15 @@ Respond naturally as Shruti, the AI resume advisor. Keep it short and conversati
 
     logger.info("voice_chat_response", user_id=user["id"], response_len=len(answer))
     return {"answer": answer, "audio": audio_base64}
+
+
+@router.post("/parse-resume")
+async def parse_resume_for_chat(
+    resume: UploadFile = File(...),
+    user: dict = Depends(get_current_user),
+):
+    """Parse an uploaded resume file and return the extracted text."""
+    file_bytes = await resume.read()
+    filename = resume.filename or "upload.pdf"
+    text = parse_resume_file(file_bytes, filename)
+    return {"text": text}
