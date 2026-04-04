@@ -30,6 +30,7 @@ from app.api.github_enhancer import router as github_router
 from app.api.reports import router as reports_router
 from app.api.social_post import router as social_post_router
 from app.api.x_analyzer import router as x_analyzer_router
+from app.api.resume_builder_chat import router as resume_builder_chat_router
 
 logger = structlog.get_logger(__name__)
 
@@ -108,6 +109,7 @@ def create_app() -> FastAPI:
     app.include_router(reports_router)
     app.include_router(social_post_router)
     app.include_router(x_analyzer_router)
+    app.include_router(resume_builder_chat_router)
 
     # Future routers (uncomment as built):
     # from app.api.shruti import router as shruti_router
