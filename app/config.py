@@ -19,6 +19,11 @@ class Settings(BaseSettings):
     # ── Groq ──────────────────────────────────────────────────
     groq_api_key: str = Field(default="", description="Groq API key for LLM inference")
 
+    # ── Ollama Cloud (Behavioral AI) ────────────────────────────
+    ollama_cloud_api_key: str = Field(default="", description="Ollama Cloud API key for behavioral profiling")
+    ollama_cloud_base_url: str = Field(default="https://ollama.com", description="Ollama Cloud API base URL")
+    ollama_cloud_model: str = Field(default="qwen3.5:397b-cloud", description="Ollama Cloud model for behavior analysis")
+
     # ── AWS Bedrock (optional) ────────────────────────────────
     aws_access_key_id: Optional[str] = Field(default=None, description="AWS access key")
     aws_secret_access_key: Optional[str] = Field(default=None, description="AWS secret key")
